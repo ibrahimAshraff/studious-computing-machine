@@ -1,11 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from './assets/Inda-logo.png'
+import db from "./firebase"
+import { onSnapshot, collection, addDoc } from "firebase/firestore";
+
 
 function App() {
+
+  const [count, setCount] = useState(0)
+  const [email, setEmail] = useState("")
+  const [isSending, setIsSending] = useState(false)
+
+
+  useEffect(
+    () =>
+      onSnapshot(collection(db, "emails"), (snapshot) => {
+
+        setCount(snapshot.docs.map(doc => doc.data()).length)
+      }), [])
+
+  const handleNew = async () => {
+
+    setIsSending(true)
+    const collectionRef = collection(db, "emails")
+    const payload = { emails: email }
+
+    await addDoc(collectionRef, payload)
+
+    alert("Successful")
+    setEmail("")
+    setIsSending(false)
+
+  }
+
+  const handleEmail = e => {
+    setEmail(e.target.value)
+
+  }
+
+
+
+
+
   return (
     <>
-      <div className="hero-background">
-        <div className="header-container">
+      <div className="hero-background" >
+        <div className="container">
 
           <div className="header">
             <div>
@@ -18,7 +57,7 @@ function App() {
           </div>
         </div>
 
-        <div className="hero header-container">
+        <div className="hero container">
           <div className="hero-text">
             <h1>
               Developing at scale,  premium candles for Nigerians.
@@ -27,17 +66,21 @@ function App() {
               At Inda we deal in unscented and scented candles, which come in all shapes and sizes. We know that there are 10,000 different candle scents and we are proud to say we hold a significant number of the total scents. We are constantly looking to improve our scent line            </span>
           </div>
 
-          <form className="form">
+
+          <div className="form">
+
             <input
-              type="email"
               placeholder="your email here"
+              value={email}
+              onChange={handleEmail}
             />
 
-            <button>
-              Join the Waitlist
+            <button onClick={handleNew} disabled={email.length === 0} >
+              {isSending ? "Waxing" : "Join the Waxlist"}
             </button>
-          </form>
+          </div>
 
+          <span style={{ marginTop: "1em" }}> Subscriber Count: {count}</span>
         </div>
 
 

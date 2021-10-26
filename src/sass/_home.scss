@@ -1,0 +1,127 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  font-family: "Poppins", Courier, monospace;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hero-background {
+  background-color: #affcca66;
+  text-align: center;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10em;
+
+  &-text {
+    color: #635d5c;
+
+    & h1 {
+      font-size: 4em;
+      font-weight: 600;
+
+      @include responsive(phone) {
+        font-size: 2em;
+      }
+    }
+
+    & span {
+      display: block;
+      margin: 0 auto;
+      padding: 1em;
+
+      @include responsive(phone) {
+        font-size: 0.9em;
+        padding-top: 1em;
+      }
+    }
+  }
+}
+
+.form {
+  width: 400px;
+  height: 69px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 0 auto;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  display: flex;
+  align-items: center;
+  @include responsive(phone) {
+    flex-direction: column;
+    width: 300px;
+
+    padding: 5px;
+    height: 90px;
+  }
+
+  & input {
+    height: inherit;
+    background: transparent;
+    width: 389px;
+    outline: none;
+    max-width: 389px;
+    border: none;
+    font-family: "Poppins";
+    font-size: 14px;
+    // padding-left: 16px;
+
+    @include responsive(phone) {
+      margin: 0 auto;
+      font-size: 14px;
+      width: 100%;
+
+      text-align: center;
+    }
+  }
+
+  & button {
+    width: 180px;
+    height: 48px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+    background-color: #00d23b;
+    color: #fff;
+    font-family: "Poppins";
+    cursor: pointer;
+
+    @include responsive(phone) {
+      width: 100%;
+      height: 70px;
+      font-size: 14px;
+    }
+
+    &:disabled {
+      background-color: #00d23c93;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #635d5c;
+
+  & img {
+    width: 100px;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding-top: 3em;
+  max-width: 1116px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
